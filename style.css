@@ -1,0 +1,96 @@
+body {
+  margin: 0;
+  margin-top: 50px;
+  width: 100vw;
+  height: 100vh;
+  background-color: hsl(0, 0%, 90%);
+  font-family: Arial, Helvetica, sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: start;
+  user-select: none;
+}
+
+.container {
+  max-width: 40rem;
+  height: 45rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: center;
+  background-color: hsl(0, 0%, 100%);
+  box-shadow: 5px 5px 10px hsl(0, 0%, 50%, 0.5), -5px -5px 10px hsl(0, 0%, 100%, 0.8);
+  border: none;
+  border-radius: 25px;
+}
+
+.header {
+  margin: 25px;
+  font-size: 3rem;
+  font-weight: bold;
+  background: linear-gradient(to right, #667eea, #764ba2);
+  background-clip: text;
+  color: transparent;
+}
+
+.location {
+  margin-bottom: 20px;
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: #333333;
+}
+
+.infoContainer {
+  margin: 0px 25px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: start;
+}
+
+.dateContainer,
+.weatherContainer {
+  padding: 0px 25px;
+  width: 250px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.weatherContainer {
+  border-left: 2px solid #505050;
+}
+
+.dateLabel,
+.weatherLabel {
+  margin-bottom: 20px;
+  font-size: 1.7rem;
+  font-weight: bold;
+  color: hsl(0, 0%, 0%, 0.75);
+}
+
+.timeDisplay,
+.dateDisplay,
+.dayDisplay,
+.descDisplay,
+.tempDisplay,
+.humidityDisplay,
+.windSpeedDisplay {
+  margin-bottom: 5px;
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+.weatherEmoji {
+  margin: auto;
+  font-size: 7.5rem;
+  text-shadow: 0 0 15px hsla(0, 0%, 20%, 0.25);
+}
+
+.about {
+  margin: 25px;
+  margin-top: auto;
+  font-size: 1rem;
+  color: hsl(0, 0%, 0%, 0.75);
+}
