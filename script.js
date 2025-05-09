@@ -11,32 +11,36 @@ const windSpeedDisplay = document.querySelector(".windSpeedDisplay");
 
 const weatherEmoji = document.querySelector(".weatherEmoji");
 
+const aboutLabel = document.querySelector(".about");
+
 const encodedKey = `N2JiNzQ3MzgzOTNkYjY3NmUzM2Q0NmFlMjZmYjUxYTU=`;
 const apiKey = atob(encodedKey);
 
 async function getLocation() {
   return new Promise((resolve, reject) => {
-    // Return a Promise
     if (!navigator.geolocation) {
-      // Check if geolocation is supported
-      reject(new Error("Geolocation Not Supported")); // Reject if not supported
+      reject(new Error("Geolocation Not Supported"));
       return;
     }
 
+    const options = {
+      enableHighAccuracy: true, // Request higher accuracy
+      timeout: 5000, // Set a timeout (in milliseconds)
+      maximumAge: 0, // Don't use cached location
+    };
+
     navigator.geolocation.getCurrentPosition(
-      // Get current position
       (position) => {
-        // Get latitude and longitude
         const lat = position.coords.latitude;
         const lon = position.coords.longitude;
-        resolve([lat, lon]); // Resolve with coordinates
+        resolve([lat, lon]);
       },
       (error) => {
-        // Error callback
         console.error(error);
         reject(error);
         return;
-      }
+      },
+      options // Pass the options object
     );
   });
 }
@@ -58,9 +62,14 @@ function disiplayWeatherData(data) {
     wind: { speed },
   } = data;
 
+  formattedDesc = description
+    .split(" ")
+    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+    .join(" ");
+
   locationLabel.textContent = city;
-  descDisplay.textContent = description;
-  tempDisplay.textContent = `${temp}°C`;
+  descDisplay.textContent = formattedDesc;
+  tempDisplay.textContent = `${Math.round(temp - 273.15)}°C`;
   humidityDisplay.textContent = `Humidity: ${humidity}%`;
   windSpeedDisplay.textContent = `Wind Speed: ${speed} km/h`;
 
@@ -73,7 +82,7 @@ function disiplayWeatherData(data) {
   if (id > 800 && id < 900) weatherEmoji.textContent = "☁️";
 }
 
-async function UseLocation() {
+async function updateWeatherData() {
   try {
     const coordinates = await getLocation(); // Wait for location
 
@@ -100,6 +109,7 @@ function updateDateAndTime() {
     meridian = "PM";
   }
   timeDisplay.textContent = `${hours}:${minutes} ${meridian}`;
+  aboutLabel.textContent = `Made by Trishaan • Last Updated ${hours}:${minutes} ${meridian}`;
 
   const day = date.getDate().toString().padStart(2, "0");
   const month = (date.getMonth() + 1).toString().padStart(2, "0");
@@ -112,9 +122,9 @@ function updateDateAndTime() {
 }
 
 updateDateAndTime();
-UseLocation();
+updateWeatherData();
 
 setInterval(() => {
   updateDateAndTime();
-  UseLocation();
+  updateWeatherData();
 }, 60000);
