@@ -13,7 +13,7 @@ body {
 
 .container {
   max-width: 40rem;
-  height: 45rem;
+  max-height: 45rem;
   display: flex;
   flex-direction: column;
   justify-content: start;
@@ -83,14 +83,13 @@ body {
 }
 
 .weatherEmoji {
-  margin: auto;
+  margin: 55px;
   font-size: 7.5rem;
   text-shadow: 0 0 15px hsla(0, 0%, 20%, 0.25);
 }
 
 .about {
   margin: 25px;
-  margin-top: auto;
   font-size: 1rem;
   color: hsl(0, 0%, 0%, 0.75);
 }

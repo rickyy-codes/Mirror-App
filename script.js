@@ -54,12 +54,13 @@ async function getWeatherData(coordinates) {
   return await response.json();
 }
 
-function disiplayWeatherData(data) {
+function displayWeatherData(data) {
+  console.log(data);
   const {
     name: city,
-    main: { temp, humidity },
+    main: { temp, humidity }, // kelvin
     weather: [{ description, id }],
-    wind: { speed },
+    wind: { speed }, // m/sk
   } = data;
 
   formattedDesc = description
@@ -69,9 +70,9 @@ function disiplayWeatherData(data) {
 
   locationLabel.textContent = city;
   descDisplay.textContent = formattedDesc;
-  tempDisplay.textContent = `${Math.round(temp - 273.15)}°C`;
+  tempDisplay.textContent = `Temperature: ${Math.round(temp - 273.15)}°C`;
   humidityDisplay.textContent = `Humidity: ${humidity}%`;
-  windSpeedDisplay.textContent = `Wind Speed: ${speed} km/h`;
+  windSpeedDisplay.textContent = `Wind Speed: ${((speed * 18) / 5).toFixed(1)} km/h`;
 
   if (id > 199 && id < 300) weatherEmoji.textContent = "🌩️";
   if (id > 299 && id < 400) weatherEmoji.textContent = "🌦️";
@@ -92,7 +93,7 @@ async function updateWeatherData() {
     }
 
     const weatherData = await getWeatherData(coordinates);
-    disiplayWeatherData(weatherData);
+    displayWeatherData(weatherData);
   } catch (error) {
     console.error(error);
   }
